@@ -85,6 +85,7 @@ module Smpp::Pdu
 
     def initialize(command_id, command_status, seq, body='')    
       length = 16 + body.length
+      length = 16 + body.force_encoding("BINARY").length
       @command_id = command_id
       @command_status = command_status
       @body = body
