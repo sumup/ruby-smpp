@@ -98,13 +98,19 @@ class Smpp::Transceiver < Smpp::Base
   # Use data_coding to find out what message part size we can use
   # http://en.wikipedia.org/wiki/SMS#Message_size
   def self.get_message_part_size options
-    return 153 if options[:data_coding].nil?
-    return 153 if options[:data_coding] == 0
-    return 134 if options[:data_coding] == 3
-    return 134 if options[:data_coding] == 5
-    return 134 if options[:data_coding] == 6
-    return 134 if options[:data_coding] == 7
-    return 67  if options[:data_coding] == 8
-    return 153
+
+    # Message length must be at most 127. The concatenated message structure has 6 additional bytes,
+    # in UCS-16 the number of characters must be even, so 120 is the maximum message length.
+    #
+    # http://stackoverflow.com/questions/22935004/string-encoding-issue-in-ruby/22935066
+    #
+    return 120 if options[:data_coding].nil?
+    return 120 if options[:data_coding] == 0
+    return 120 if options[:data_coding] == 3
+    return 120 if options[:data_coding] == 5
+    return 120 if options[:data_coding] == 6
+    return 120 if options[:data_coding] == 7
+    return 120 if options[:data_coding] == 8
+    return 120
   end
 end
