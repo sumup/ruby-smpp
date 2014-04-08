@@ -34,6 +34,7 @@ class Smpp::Pdu::SubmitSm < Smpp::Pdu::Base
     payload                  = @udh ? @udh + @short_message : @short_message 
     @sm_length               = payload.length
     
+    @sm_length               = payload.force_encoding("BINARY").length
     @optional_parameters     = options[:optional_parameters]
     
     # craft the string/byte buffer
