@@ -104,13 +104,6 @@ class Smpp::Transceiver < Smpp::Base
     #
     # http://stackoverflow.com/questions/22935004/string-encoding-issue-in-ruby/22935066
     #
-    return 120 if options[:data_coding].nil?
-    return 120 if options[:data_coding] == 0
-    return 120 if options[:data_coding] == 3
-    return 120 if options[:data_coding] == 5
-    return 120 if options[:data_coding] == 6
-    return 120 if options[:data_coding] == 7
-    return 120 if options[:data_coding] == 8
     return 120
   end
 end
